@@ -1,0 +1,23 @@
+Prompt: Ares - Gott des Krieges, des Massakers, des Blutbads... alles keine angenehmen und angesehen Bereiche für einen Gott. Ares hat nun genug von all den Kriegen und will Frieden schaffen. Er sieht dafür nur eine Lösung: er muss sterben. Aber einen Gott umzubringen ist nicht leicht, insbesondere wenn dieser ein Krieges-Gott ist und damit selbstverständlich besonders gut kämpfen kann. Nun versucht er sich in den Hades zu begeben, um die stärksten Monster zu finden, die ihn trotz seiner umhauenden Kraft töten könnten.
+
+Visual Assets:
+S-Tier
+1. Ares Charakter
+	a. Ares Angriff Animation
+	b. Ares stehender Zustand als Marmorstatue
+	c. "Finally"-Sterbensanimation
+2. Gegner
+	a. Angriff
+	b. Tod
+	c. Gelangweiltes Abdrehen von der Marmorstatue
+
+3. Lebensleiste
+4. Rahmen
+5. Kampfschauplatz (Hintergrund)
+
+A-Tier
+6. Mögliche Götterprofile, die dir (random) Boons geben
+7. Zwischenbildschirm, in dem du Debuffs aussuchen kannst
+	a. Szenenhintergrund
+	b. Boon zw. Debuffsicons
+8. Anfangsszene, in der Geschichte und Steuerung erklärt wird
