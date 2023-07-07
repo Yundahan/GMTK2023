@@ -6,6 +6,7 @@ S-Tier
 	a. Ares Angriff Animation
 	b. Ares stehender Zustand als Marmorstatue
 	c. "Finally"-Sterbensanimation
+	d. Waffenprojektil (Animation)
 2. Gegner
 	a. Angriff
 	b. Tod
