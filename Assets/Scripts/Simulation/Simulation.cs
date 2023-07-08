@@ -8,10 +8,10 @@ public class Simulation : MonoBehaviour
 {
     public float ENEMY_SPAWN_CD = 1f;
     public float HEAL_AREA_CD = 2f;
+    public bool HEAL_AREAS_ACTIVE = false;
 
     private float PLAYING_FIELD_HEIGHT = 10f;
     private float PLAYING_FIELD_WIDTH = 18f;
-
     private float BOUNDS_VERTICAL = 4f;
     private float BOUNDS_HORIZONTAL = 8f;
 
@@ -41,7 +41,7 @@ public class Simulation : MonoBehaviour
             GameObject enemy = Instantiate(enemyPrefab, GetEnemySpawnPosition(), Quaternion.identity);
         }
 
-        if (Time.time - healAreaTimer > HEAL_AREA_CD)
+        if (HEAL_AREAS_ACTIVE && Time.time - healAreaTimer > HEAL_AREA_CD)
         {
             healAreaTimer = Time.time;
 

@@ -1082,8 +1082,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52a424252c2e75a4c921c6e69f3d4976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ENEMY_SPAWN_CD: 1
+  ENEMY_SPAWN_CD: 0.5
   HEAL_AREA_CD: 2
+  HEAL_AREAS_ACTIVE: 1
   enemyPrefab: {fileID: 5910619964777669929, guid: 2fc30196ccc742946a9d7c052e5a1f76, type: 3}
   areaPrefab: {fileID: 2835443374175443413, guid: 390ae9b4e26984346a19e1d3de8a6124, type: 3}
   killcount: {fileID: 29799073}
@@ -1940,7 +1941,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1392738745
 RectTransform:
   m_ObjectHideFlags: 0
