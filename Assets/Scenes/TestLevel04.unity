@@ -1087,7 +1087,7 @@ MonoBehaviour:
   areaPrefab: {fileID: 2835443374175443413, guid: 390ae9b4e26984346a19e1d3de8a6124, type: 3}
   killcount: {fileID: 29799073}
   savedcount: {fileID: 263575269}
-  nextLevel: 
+  nextLevel: TestLevel05
 --- !u!1 &566557960
 GameObject:
   m_ObjectHideFlags: 0
@@ -2324,8 +2324,8 @@ MonoBehaviour:
   INDICATOR_DURATION: 0.5
   LASER_DURATION: 0.2
   MAX_HP: 100
-  laserMode: 0
-  alternateShotDirection: 1
+  laserMode: 1
+  alternateShotDirection: 0
   indicatorV: {fileID: 720872459}
   indicatorH: {fileID: 934977377}
   indicatorDV: {fileID: 446240387}

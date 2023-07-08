@@ -9,6 +9,8 @@ public class Simulation : MonoBehaviour
 {
     public float ENEMY_SPAWN_CD = 1f;
     public float HEAL_AREA_CD = 2f;
+    public int HEAL_VALUE = 10;
+    public int DAMAGE_VALUE = -5;
     public bool HEAL_AREAS_ACTIVE = false;
 
     private float PLAYING_FIELD_HEIGHT = 10f;
@@ -42,6 +44,8 @@ public class Simulation : MonoBehaviour
             enemyTimer = Time.time;
 
             GameObject enemy = Instantiate(enemyPrefab, GetEnemySpawnPosition(), Quaternion.identity);
+            enemy.GetComponent<EnemyMovement>().SetHealValue(HEAL_VALUE);
+            enemy.GetComponent<EnemyMovement>().SetDamageValue(DAMAGE_VALUE);
         }
 
         if (HEAL_AREAS_ACTIVE && Time.time - healAreaTimer > HEAL_AREA_CD)

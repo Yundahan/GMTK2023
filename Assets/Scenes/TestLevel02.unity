@@ -2341,7 +2341,7 @@ MonoBehaviour:
   INDICATOR_DURATION: 0.5
   LASER_DURATION: 0.2
   MAX_HP: 100
-  laserMode: 1
+  laserMode: 0
   alternateShotDirection: 0
   indicatorV: {fileID: 720872459}
   indicatorH: {fileID: 934977377}
