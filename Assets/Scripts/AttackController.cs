@@ -22,6 +22,7 @@ public class AttackController : MonoBehaviour
     public IndicatorScript indicatorDH;
 
     private UIManager uiManager;
+    private Simulation simulation;
 
     private float lastIndicatorTime;
     private float lastShotTime;
@@ -36,6 +37,7 @@ public class AttackController : MonoBehaviour
     void Awake()
     {
         uiManager = GameObject.FindObjectOfType<UIManager>();
+        simulation = GameObject.FindObjectOfType<Simulation>();
         lastIndicatorTime = Time.time + INITIAL_ATTACK_CD;
         lastShotTime = Time.time + ATTACK_CD + INITIAL_ATTACK_CD;
         this.SetHitpoints(MAX_HP);
@@ -109,5 +111,10 @@ public class AttackController : MonoBehaviour
         hitPoints += value;
         hitPoints = Math.Clamp(hitPoints, 0, MAX_HP);
         uiManager.SetHPBar(hitPoints, MAX_HP);
+
+        if(hitPoints == 0)
+        {
+            simulation.NextScene();
+        }
     }
 }

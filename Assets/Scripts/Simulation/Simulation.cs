@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Simulation : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class Simulation : MonoBehaviour
 
     public TextMeshProUGUI killcount;
     public TextMeshProUGUI savedcount;
+
+    public string nextLevel;
 
     private float enemyTimer;
     private float healAreaTimer;
@@ -91,6 +94,22 @@ public class Simulation : MonoBehaviour
             {
                 return new Vector3(Random.Range(-PLAYING_FIELD_WIDTH / 2, PLAYING_FIELD_WIDTH / 2), -PLAYING_FIELD_HEIGHT / 2, 0);
             }
+        }
+    }
+
+    public void NextScene()
+    {
+        StartCoroutine(LoadNextScene());
+    }
+
+    IEnumerator LoadNextScene()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(nextLevel);
+
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
         }
     }
 }
