@@ -11,18 +11,11 @@ public class VolumeSlider : MonoBehaviour
     [SerializeField]
     private AudioSource AudioS;
     [SerializeField]
-    private TextMeshProUGUI ValueText;
-    [SerializeField]
     private AudioMixMode MixMode;
-    [SerializeField]
-    private float PercCalc;
 
 
     public void OnChangeSlider (float Value)
     {
-        PercCalc = Value * 100;
-        ValueText.SetText($"{PercCalc.ToString("N2")}"  +"%");
-
         switch(MixMode)
         {
             /*case AudioMixMode.LinearAudioSourceVolume:
