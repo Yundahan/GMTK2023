@@ -11,6 +11,9 @@ public class EnemyMovement : MonoBehaviour
     public float KILL_DISTANCE = 2f;
     public float MAX_DIRECTION_ROTATION = 20;
     public float DIRECTION_CHANGE_CD = 2f;
+    public int HEAL_VALUE = 10;
+    public int DAMAGE_VALUE = -5;
+
     private float BOUNDS_VERTICAL = 4f;
     private float BOUNDS_HORIZONTAL = 8f;
 
@@ -77,6 +80,15 @@ public class EnemyMovement : MonoBehaviour
 
     private void Kill(bool saved)
     {
+        if (saved)
+        {
+            player.GetComponent<AttackController>().ChangeHitpoints(DAMAGE_VALUE);
+        }
+        else
+        {
+            player.GetComponent<AttackController>().ChangeHitpoints(HEAL_VALUE);
+        }
+
         simulation.UpdateCounts(saved);
         Destroy(gameObject);
     }

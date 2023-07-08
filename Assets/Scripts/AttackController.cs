@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -10,13 +11,15 @@ public class AttackController : MonoBehaviour
     public float INITIAL_ATTACK_CD = 2f;
     public float ATTACK_CD = 1f;
     public float LASER_DURATION = 0.2f;
+    public int MAX_HP = 100;
 
     public GameObject bulletPrefab;
     public LaserScript laserV;
     public LaserScript laserH;
-    public Image timer;
+    public UIManager uiManager;
 
     private float lastShotTime;
+    private int hitPoints;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +29,9 @@ public class AttackController : MonoBehaviour
 
     void Awake()
     {
+        uiManager = GameObject.FindObjectOfType<UIManager>();
         lastShotTime = Time.time + INITIAL_ATTACK_CD;
+        hitPoints = MAX_HP;
     }
 
     // Update is called once per frame
@@ -40,17 +45,31 @@ public class AttackController : MonoBehaviour
             laserV.gameObject.SetActive(true);
             laserH.SetTimer();
             laserV.SetTimer();
-        } 
+        }
 
-        float timerFraction = (Time.time - lastShotTime) / ATTACK_CD;
-        timerFraction = Mathf.Clamp01(timerFraction);
-
-        timer.transform.localScale = new Vector3((1 - timerFraction), 1, 1);
-        timer.transform.position = new Vector3(401.5f + (1 - timerFraction) * 100f, timer.transform.position.y, 0);
+        uiManager.SetTimerBar(lastShotTime, ATTACK_CD);
     }
 
     public float GetLaserDuration()
     {
         return LASER_DURATION;
+    }
+
+    public int GetHitpoints()
+    {
+        return hitPoints;
+    }
+
+    public void SetHitpoints(int value)
+    {
+        hitPoints = value;
+        uiManager.SetHPBar(hitPoints, MAX_HP);
+    }
+
+    public void ChangeHitpoints(int value)
+    {
+        hitPoints += value;
+        hitPoints = Math.Clamp(hitPoints, 0, MAX_HP);
+        uiManager.SetHPBar(hitPoints, MAX_HP);
     }
 }

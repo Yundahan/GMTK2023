@@ -8,7 +8,7 @@ public class LaserScript : MonoBehaviour
 
     private float timer;
     public AudioSource LaserAudio;
-    private bool LaserActive = true;
+    private bool LaserActive = false;
 
     // Start is called before the first frame update
     void Start()
