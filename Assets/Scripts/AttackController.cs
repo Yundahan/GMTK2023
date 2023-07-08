@@ -38,7 +38,7 @@ public class AttackController : MonoBehaviour
         uiManager = GameObject.FindObjectOfType<UIManager>();
         lastIndicatorTime = Time.time + INITIAL_ATTACK_CD;
         lastShotTime = Time.time + ATTACK_CD + INITIAL_ATTACK_CD;
-        hitPoints = MAX_HP;
+        this.SetHitpoints(MAX_HP);
     }
 
     // Update is called once per frame
