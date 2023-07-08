@@ -2,9 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AttackController : MonoBehaviour
 {
