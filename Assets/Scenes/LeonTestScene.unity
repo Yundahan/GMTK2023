@@ -656,6 +656,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -753,6 +754,22 @@ MonoBehaviour:
   enemyPrefab: {fileID: 5910619964777669929, guid: 2fc30196ccc742946a9d7c052e5a1f76, type: 3}
   killcount: {fileID: 29799073}
   savedcount: {fileID: 263575269}
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55c0fb75db01b554087e1889a420dd42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songStart: {fileID: 8300000, guid: a6401520203c4af408f9d72b74916bf6, type: 3}
+  songLoop: {fileID: 1376090510}
+  introToggle: 0
+  rndSongTime: 0
 --- !u!1 &566557960
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,9 +1211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mixer: {fileID: 24100000, guid: 819d7a5c09da6e74db6b9c42791cf7d5, type: 2}
   AudioS: {fileID: 1376090510}
-  ValueText: {fileID: 1125434498}
   MixMode: 2
-  PercCalc: 0
 --- !u!114 &1110854799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1482,7 +1497,7 @@ GameObject:
   - component: {fileID: 1376090511}
   - component: {fileID: 1376090510}
   m_Layer: 0
-  m_Name: SourceBGM
+  m_Name: Stage1BGMLoop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1498,8 +1513,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 819d7a5c09da6e74db6b9c42791cf7d5, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 1aea7f761062ce244b45cfcd3d647633, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: a6f7338c32f7df54c9ec9664a9f815ea, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -1926,13 +1941,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8f887c64ae15e4a8ddc733391177c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  INITIAL_ATTACK_CD: 0
+  INITIAL_ATTACK_CD: 0.72
   ATTACK_CD: 0.96
   LASER_DURATION: 0.2
+  MAX_HP: 100
   bulletPrefab: {fileID: 7596374221931106551, guid: fa7d7dbb708b840408365551ebafe418, type: 3}
   laserV: {fileID: 56399841}
   laserH: {fileID: 587161491}
-  timer: {fileID: 1392738746}
+  uiManager: {fileID: 0}
 --- !u!114 &1832783310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2045,7 +2061,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 819d7a5c09da6e74db6b9c42791cf7d5, type: 2}
   m_audioClip: {fileID: 8300000, guid: aa6daa9f2efcedc40be7a0a7385a8d49, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
