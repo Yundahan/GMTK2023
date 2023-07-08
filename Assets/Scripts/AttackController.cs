@@ -9,6 +9,7 @@ public class AttackController : MonoBehaviour
 {
     public float INITIAL_ATTACK_CD = 2f;
     public float ATTACK_CD = 1f;
+    public float LASER_DURATION = 0.2f;
 
     public GameObject bulletPrefab;
     public LaserScript laserV;
@@ -46,5 +47,10 @@ public class AttackController : MonoBehaviour
 
         timer.transform.localScale = new Vector3((1 - timerFraction), 1, 1);
         timer.transform.position = new Vector3(401.5f + (1 - timerFraction) * 100f, timer.transform.position.y, 0);
+    }
+
+    public float GetLaserDuration()
+    {
+        return LASER_DURATION;
     }
 }
