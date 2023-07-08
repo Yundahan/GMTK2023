@@ -7,7 +7,7 @@ S-Tier
 	b. Ares stehender Zustand als Marmorstatue
 	c. "Finally"-Sterbensanimation
 	d. Waffenprojektil (Animation)
-	e. Schild
+	
 2. Gegner
 	a. Angriff
 	b. Tod
@@ -15,11 +15,17 @@ S-Tier
 
 3. Lebensleiste
 4. Rahmen
-5. Kampfschauplatz (Hintergrund)
+	a. Säulen
+	b. Decke
+	c. unten Gras?
+5. Kampfschauplatz (Hintergrund)/Boden
+[6. Todeszahl der Gegner?]
+
 
 A-Tier
-6. Mögliche Götterprofile, die dir (random) Boons geben
-7. Zwischenbildschirm, in dem du Debuffs aussuchen kannst
+1. Mögliche Götterprofile, die dir (random) Boons geben
+2. Zwischenbildschirm, in dem du Debuffs aussuchen kannst
 	a. Szenenhintergrund
 	b. Boon zw. Debuffsicons
-8. Anfangsszene, in der Geschichte und Steuerung erklärt wird
+3. Anfangsszene, in der Geschichte und Steuerung erklärt wird
+4. Soundleiste
