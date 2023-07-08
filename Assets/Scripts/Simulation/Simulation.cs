@@ -30,7 +30,7 @@ public class Simulation : MonoBehaviour
         {
             timer = Time.time;
 
-            Instantiate(enemyPrefab, GetEnemySpawnPosition(), Quaternion.identity);
+            GameObject enemy = Instantiate(enemyPrefab, GetEnemySpawnPosition(), Quaternion.identity);
         }
     }
 

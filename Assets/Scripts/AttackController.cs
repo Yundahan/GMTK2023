@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AttackController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class AttackController : MonoBehaviour
     public float ATTACK_CD = 1f;
 
     public GameObject bulletPrefab;
+    public Image timer;
 
     private float lastShotTime;
 
@@ -39,5 +41,11 @@ public class AttackController : MonoBehaviour
             GameObject upBullet = Instantiate(bulletPrefab, this.transform.position + Vector3.up, Quaternion.Euler(Vector3.forward * 270));
             upBullet.GetComponent<BulletScript>().SetDirection(Vector3.up);
         }
+
+        float healthbarFraction = (Time.time - lastShotTime) / ATTACK_CD;
+        healthbarFraction = Mathf.Clamp01(healthbarFraction);
+
+        timer.transform.localScale = new Vector3(1 - healthbarFraction, 1, 1);
+        timer.transform.position = new Vector3((1 - healthbarFraction) * -250, timer.transform.position.y, 0);
     }
 }

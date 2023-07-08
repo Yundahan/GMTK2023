@@ -144,4 +144,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DESPAWN_TIME: 3
-  BULLET_SPEED: 5
+  BULLET_SPEED: 75

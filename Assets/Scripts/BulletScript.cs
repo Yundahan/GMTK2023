@@ -7,6 +7,9 @@ public class BulletScript : MonoBehaviour
     public float DESPAWN_TIME = 3f;
     public float BULLET_SPEED = 0.01f;
 
+    private float BOUNDS_VERTICAL = 4f;
+    private float BOUNDS_HORIZONTAL = 8f;
+
     private float spawnTime;
     private Vector3 direction;
 
@@ -16,7 +19,7 @@ public class BulletScript : MonoBehaviour
         
     }
 
-    private void Awake()
+    void Awake()
     {
         spawnTime = Time.time;
     }
@@ -24,12 +27,26 @@ public class BulletScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - spawnTime > DESPAWN_TIME)
+        if (Time.time - spawnTime > DESPAWN_TIME || CheckOutOfBounds())
         {
             this.Kill();
         }
 
         this.transform.position += direction * Time.deltaTime * BULLET_SPEED;
+    }
+
+    private bool CheckOutOfBounds()
+    {
+        if (this.transform.position.x < -BOUNDS_HORIZONTAL || this.transform.position.x > BOUNDS_HORIZONTAL)
+        {
+            return true;
+        }
+        if (this.transform.position.y < -BOUNDS_VERTICAL || this.transform.position.y > BOUNDS_VERTICAL)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public Vector3 GetDirection()
