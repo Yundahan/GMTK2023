@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LaserScript : MonoBehaviour
 {
-    public float LASER_DURATION = 0.2f;
+    private AttackController attackController;
 
     private float timer;
 
@@ -14,10 +14,15 @@ public class LaserScript : MonoBehaviour
         
     }
 
+    private void Awake()
+    {
+        attackController = this.transform.parent.GetComponent<AttackController>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if(Time.time - timer > LASER_DURATION)
+        if(Time.time - timer > attackController.GetLaserDuration())
         {
             gameObject.SetActive(false);
         }
