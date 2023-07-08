@@ -81,8 +81,6 @@ public class AttackController : MonoBehaviour
         {
             lastShotTime = lastIndicatorTime + INDICATOR_DURATION;
         }
-
-        uiManager.SetTimerBar(lastShotTime, ATTACK_CD);
     }
 
     public float GetLaserDuration()
