@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,10 +43,10 @@ public class AttackController : MonoBehaviour
             upBullet.GetComponent<BulletScript>().SetDirection(Vector3.up);
         }
 
-        float healthbarFraction = (Time.time - lastShotTime) / ATTACK_CD;
-        healthbarFraction = Mathf.Clamp01(healthbarFraction);
+        float timerFraction = (Time.time - lastShotTime) / ATTACK_CD;
+        timerFraction = Mathf.Clamp01(timerFraction);
 
-        timer.transform.localScale = new Vector3(1 - healthbarFraction, 1, 1);
-        timer.transform.position = new Vector3((1 - healthbarFraction) * -250, timer.transform.position.y, 0);
+        timer.transform.localScale = new Vector3((1 - timerFraction), 1, 1);
+        timer.transform.position = new Vector3(401.5f + (1 - timerFraction) * 100f, timer.transform.position.y, 0);
     }
 }
