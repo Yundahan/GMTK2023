@@ -7,31 +7,47 @@ using UnityEngine;
 public class Simulation : MonoBehaviour
 {
     public float ENEMY_SPAWN_CD = 1f;
+    public float HEAL_AREA_CD = 2f;
 
     private float PLAYING_FIELD_HEIGHT = 10f;
     private float PLAYING_FIELD_WIDTH = 18f;
 
+    private float BOUNDS_VERTICAL = 4f;
+    private float BOUNDS_HORIZONTAL = 8f;
+
     public GameObject enemyPrefab;
+    public GameObject areaPrefab;
 
     public TextMeshProUGUI killcount;
     public TextMeshProUGUI savedcount;
 
-    private float timer;
+    private float enemyTimer;
+    private float healAreaTimer;
     private int kills = 0;
     private int saves = 0;
 
     void Awake()
     {
-        timer = Time.time + ENEMY_SPAWN_CD;
+        enemyTimer = Time.time + ENEMY_SPAWN_CD;
+        healAreaTimer = Time.time + HEAL_AREA_CD;
     }
 
     void Update()
     {
-        if(Time.time - timer > ENEMY_SPAWN_CD)
+        if (Time.time - enemyTimer > ENEMY_SPAWN_CD)
         {
-            timer = Time.time;
+            enemyTimer = Time.time;
 
             GameObject enemy = Instantiate(enemyPrefab, GetEnemySpawnPosition(), Quaternion.identity);
+        }
+
+        if (Time.time - healAreaTimer > HEAL_AREA_CD)
+        {
+            healAreaTimer = Time.time;
+
+            Vector3 areaPosition = new Vector3(Random.Range(-BOUNDS_HORIZONTAL, BOUNDS_HORIZONTAL), Random.Range(-BOUNDS_VERTICAL, BOUNDS_VERTICAL), 0);
+            GameObject healArea = Instantiate(areaPrefab, areaPosition, Quaternion.identity);
+            healArea.GetComponent<HealAreaScript>().StartIndicator();
         }
     }
 
