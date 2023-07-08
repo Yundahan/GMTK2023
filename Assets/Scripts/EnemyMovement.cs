@@ -11,6 +11,8 @@ public class EnemyMovement : MonoBehaviour
     public float KILL_DISTANCE = 2f;
     public float MAX_DIRECTION_ROTATION = 20;
     public float DIRECTION_CHANGE_CD = 2f;
+    private float BOUNDS_VERTICAL = 4f;
+    private float BOUNDS_HORIZONTAL = 8f;
 
     private GameObject player;
     private Simulation simulation;
@@ -52,13 +54,25 @@ public class EnemyMovement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        BulletScript bullet = collider.gameObject.GetComponent<BulletScript>();
+        LaserScript laser = collider.gameObject.GetComponent<LaserScript>();
 
-        if (bullet != null)
+        if (laser != null && !CheckOutOfBounds())
         {
-            bullet.Kill();
             this.Kill(false);
         }
+    }
+    private bool CheckOutOfBounds()
+    {
+        if (this.transform.position.x < -BOUNDS_HORIZONTAL || this.transform.position.x > BOUNDS_HORIZONTAL)
+        {
+            return true;
+        }
+        if (this.transform.position.y < -BOUNDS_VERTICAL || this.transform.position.y > BOUNDS_VERTICAL)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void Kill(bool saved)
