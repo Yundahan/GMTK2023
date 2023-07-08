@@ -2057,6 +2057,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1376090511}
   - component: {fileID: 1376090510}
+  - component: {fileID: 1376090512}
   m_Layer: 0
   m_Name: SourceBGM
   m_TagString: Untagged
@@ -2175,6 +2176,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1376090512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376090509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55c0fb75db01b554087e1889a420dd42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songStart: {fileID: 8300000, guid: a6401520203c4af408f9d72b74916bf6, type: 3}
+  songLoop: {fileID: 1376090510}
+  introToggle: 1
+  rndSongTime: 0
 --- !u!1 &1445663088
 GameObject:
   m_ObjectHideFlags: 0
@@ -2655,7 +2672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8f887c64ae15e4a8ddc733391177c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  INITIAL_ATTACK_CD: 0
+  INITIAL_ATTACK_CD: 0.36
   ATTACK_CD: 0.96
   INDICATOR_DURATION: 0.5
   LASER_DURATION: 0.2
