@@ -1082,12 +1082,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ENEMY_SPAWN_CD: 1
   HEAL_AREA_CD: 2
+  HEAL_VALUE: 10
+  DAMAGE_VALUE: -5
   HEAL_AREAS_ACTIVE: 0
   enemyPrefab: {fileID: 5910619964777669929, guid: 2fc30196ccc742946a9d7c052e5a1f76, type: 3}
   areaPrefab: {fileID: 2835443374175443413, guid: 390ae9b4e26984346a19e1d3de8a6124, type: 3}
   killcount: {fileID: 29799073}
   savedcount: {fileID: 263575269}
-  nextLevel: TestLevel02
+  nextLevel: TestLevel03
 --- !u!1 &566557960
 GameObject:
   m_ObjectHideFlags: 0
@@ -1805,6 +1807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1376090511}
   - component: {fileID: 1376090510}
+  - component: {fileID: 1376090512}
   m_Layer: 0
   m_Name: SourceBGM
   m_TagString: Untagged
@@ -1822,7 +1825,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 819d7a5c09da6e74db6b9c42791cf7d5, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 1aea7f761062ce244b45cfcd3d647633, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8fc2ff5bcb6f41a4f829e16589f5fe3d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1923,6 +1926,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1376090512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376090509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55c0fb75db01b554087e1889a420dd42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songStart: {fileID: 8300000, guid: c5a03d159a392bf45aa28ef43cdce4d5, type: 3}
+  songLoop: {fileID: 1376090510}
+  introToggle: 1
+  rndSongTime: 0
 --- !u!1 &1468385312
 GameObject:
   m_ObjectHideFlags: 0
