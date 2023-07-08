@@ -173,3 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SPEED: 2
   KILL_DISTANCE: 1
+  MAX_DIRECTION_ROTATION: 20
+  DIRECTION_CHANGE_CD: 2
+  HEAL_VALUE: 10
+  DAMAGE_VALUE: -5
