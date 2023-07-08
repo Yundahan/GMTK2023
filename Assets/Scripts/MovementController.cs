@@ -6,6 +6,9 @@ public class MovementController : MonoBehaviour
 {
     public float SPEED = 0.015f;
 
+    private float BOUNDS_VERTICAL = 4f;
+    private float BOUNDS_HORIZONTAL = 8f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +20,6 @@ public class MovementController : MonoBehaviour
     {
         float newX = this.transform.position.x + SPEED * Input.GetAxisRaw("Horizontal") * Time.deltaTime;
         float newY = this.transform.position.y + SPEED * Input.GetAxisRaw("Vertical") * Time.deltaTime;
-        this.transform.position = new Vector3(newX, newY, 0);
+        this.transform.position = new Vector3(Mathf.Clamp(newX, -BOUNDS_HORIZONTAL, BOUNDS_HORIZONTAL), Mathf.Clamp(newY, -BOUNDS_VERTICAL, BOUNDS_VERTICAL), 0);
     }
 }
