@@ -14,12 +14,14 @@ public class VolumeSlider : MonoBehaviour
     private TextMeshProUGUI ValueText;
     [SerializeField]
     private AudioMixMode MixMode;
+    [SerializeField]
+    private float PercCalc;
 
 
     public void OnChangeSlider (float Value)
     {
-
-        ValueText.SetText($"{Value.ToString("N4")}");
+        PercCalc = Value * 100;
+        ValueText.SetText($"{PercCalc.ToString("N2")}"  +"%");
 
         switch(MixMode)
         {
