@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserScript : MonoBehaviour
+public class IndicatorScript : MonoBehaviour
 {
-    public AudioSource LaserAudio;
+    public LaserScript laser;
 
     private AttackController attackController;
 
@@ -16,16 +16,19 @@ public class LaserScript : MonoBehaviour
         
     }
 
-    private void Awake()
+    void Awake()
     {
-        attackController = this.transform.parent.GetComponent<AttackController>();
+        attackController = GameObject.FindObjectOfType<AttackController>();
+        timer = Time.time + 15f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Time.time - timer > attackController.GetLaserDuration())
+        if (Time.time - timer > attackController.GetIndicatorDuration())
         {
+            laser.gameObject.SetActive(true);
+            laser.SetTimer();
             gameObject.SetActive(false);
         }
     }
@@ -33,6 +36,5 @@ public class LaserScript : MonoBehaviour
     public void SetTimer()
     {
         timer = Time.time;
-        LaserAudio.Play();
     }
 }
