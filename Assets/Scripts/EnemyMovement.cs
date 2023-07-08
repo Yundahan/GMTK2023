@@ -7,12 +7,10 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public float SPEED = 1f;
-    public float KILL_DISTANCE = 2f;
-    public float MAX_DIRECTION_ROTATION = 20;
+    public float SPEED = 2f;
+    public float KILL_DISTANCE = 1f;
+    public float MAX_DIRECTION_ROTATION = 20f;
     public float DIRECTION_CHANGE_CD = 2f;
-    public int HEAL_VALUE = 10;
-    public int DAMAGE_VALUE = -5;
 
     private float BOUNDS_VERTICAL = 4f;
     private float BOUNDS_HORIZONTAL = 8f;
@@ -21,6 +19,8 @@ public class EnemyMovement : MonoBehaviour
     private Simulation simulation;
     private Vector3 movementVector;
     private float directionTimer;
+    private int healValue = 10;
+    private int damageValue = -5;
 
     // Start is called before the first frame update
     void Start()
@@ -82,14 +82,34 @@ public class EnemyMovement : MonoBehaviour
     {
         if (saved)
         {
-            player.GetComponent<AttackController>().ChangeHitpoints(DAMAGE_VALUE);
+            player.GetComponent<AttackController>().ChangeHitpoints(damageValue);
         }
         else
         {
-            player.GetComponent<AttackController>().ChangeHitpoints(HEAL_VALUE);
+            player.GetComponent<AttackController>().ChangeHitpoints(healValue);
         }
 
         simulation.UpdateCounts(saved);
         Destroy(gameObject);
+    }
+
+    public int GetHealValue(int value)
+    {
+        return healValue;
+    }
+
+    public void SetHealValue(int value)
+    {
+        this.healValue = value;
+    }
+
+    public int GetDamageValue(int value)
+    {
+        return damageValue;
+    }
+
+    public void SetDamageValue(int value)
+    {
+        this.damageValue = value;
     }
 }

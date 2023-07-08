@@ -1082,12 +1082,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ENEMY_SPAWN_CD: 1
   HEAL_AREA_CD: 2
+  HEAL_VALUE: 7
+  DAMAGE_VALUE: -5
   HEAL_AREAS_ACTIVE: 0
   enemyPrefab: {fileID: 5910619964777669929, guid: 2fc30196ccc742946a9d7c052e5a1f76, type: 3}
   areaPrefab: {fileID: 2835443374175443413, guid: 390ae9b4e26984346a19e1d3de8a6124, type: 3}
   killcount: {fileID: 29799073}
   savedcount: {fileID: 263575269}
-  nextLevel: TestLevel02
+  nextLevel: TestLevel06
 --- !u!1 &566557960
 GameObject:
   m_ObjectHideFlags: 0
@@ -2320,11 +2322,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   INITIAL_ATTACK_CD: 0
-  ATTACK_CD: 1.92
+  ATTACK_CD: 0.72
   INDICATOR_DURATION: 0.5
   LASER_DURATION: 0.2
   MAX_HP: 100
-  laserMode: 0
+  laserMode: 1
   alternateShotDirection: 0
   indicatorV: {fileID: 720872459}
   indicatorH: {fileID: 934977377}
