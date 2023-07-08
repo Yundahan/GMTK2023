@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class Simulation : MonoBehaviour
 {
-    private float ENEMY_SPAWN_CD = 1f;
+    public float ENEMY_SPAWN_CD = 1f;
+
     private float PLAYING_FIELD_HEIGHT = 10f;
     private float PLAYING_FIELD_WIDTH = 18f;
 
