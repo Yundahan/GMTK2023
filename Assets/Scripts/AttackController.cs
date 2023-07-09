@@ -122,7 +122,7 @@ public class AttackController : MonoBehaviour
 
         if(hitPoints == 0)
         {
-            simulation.NextScene();
+            simulation.EndLevel();
         }
     }
 
