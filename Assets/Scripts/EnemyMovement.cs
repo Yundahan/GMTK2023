@@ -40,7 +40,7 @@ public class EnemyMovement : MonoBehaviour
         simulation = GameObject.FindObjectOfType<Simulation>();
         player = GameObject.FindObjectOfType<MovementController>().gameObject;
         directionTimer = Time.time;
-        movementVector = player.transform.position - this.transform.position;
+        ChangeMovement(player.transform.position - this.transform.position);
     }
 
     // Update is called once per frame
@@ -61,16 +61,7 @@ public class EnemyMovement : MonoBehaviour
         {
             directionTimer = Time.time;
 
-            movementVector = playerVector;
-
-            if(movementVector.x > 0)
-            {
-                spriteRenderer.flipX = true;
-            }
-            else
-            {
-                spriteRenderer.flipX = false;
-            }
+            ChangeMovement(playerVector);
         }
 
         this.transform.position += SPEED * movementVector.normalized * Time.deltaTime;
@@ -112,6 +103,20 @@ public class EnemyMovement : MonoBehaviour
 
         simulation.UpdateCounts(saved);
         Destroy(gameObject);
+    }
+
+    private void ChangeMovement(Vector3 newMovementVector)
+    {
+        movementVector = newMovementVector;
+
+        if (movementVector.x > 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
     }
 
     public int GetHealValue(int value)
