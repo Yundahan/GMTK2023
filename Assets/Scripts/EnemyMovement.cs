@@ -11,6 +11,7 @@ public class EnemyMovement : MonoBehaviour
     public float KILL_DISTANCE = 1f;
     public float MAX_DIRECTION_ROTATION = 20f;
     public float DIRECTION_CHANGE_CD = 2f;
+    public SpriteRenderer spriteRenderer;
 
     private float BOUNDS_VERTICAL = 4f;
     private float BOUNDS_HORIZONTAL = 8f;
@@ -61,6 +62,15 @@ public class EnemyMovement : MonoBehaviour
             directionTimer = Time.time;
 
             movementVector = playerVector;
+
+            if(movementVector.x > 0)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else
+            {
+                spriteRenderer.flipX = false;
+            }
         }
 
         this.transform.position += SPEED * movementVector.normalized * Time.deltaTime;
