@@ -554,6 +554,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5807450772757091074, guid: 2fc30196ccc742946a9d7c052e5a1f76, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 1056051931}
     - target: {fileID: 5910619964777669929, guid: 2fc30196ccc742946a9d7c052e5a1f76, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -1663,6 +1667,11 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!212 &1056051931 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8491539432898328691, guid: 2fc30196ccc742946a9d7c052e5a1f76, type: 3}
+  m_PrefabInstance: {fileID: 250532661}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1110854796
 GameObject:
   m_ObjectHideFlags: 0
