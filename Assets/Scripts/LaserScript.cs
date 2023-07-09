@@ -8,7 +8,14 @@ public class LaserScript : MonoBehaviour
 
     private AttackController attackController;
 
+    private Simulation simulation;
     private float timer;
+    private GameState gameState;
+
+    private struct GameState
+    {
+        public float timerDifference;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -18,13 +25,19 @@ public class LaserScript : MonoBehaviour
 
     private void Awake()
     {
+        simulation = GameObject.FindObjectOfType<Simulation>();
         attackController = this.transform.parent.GetComponent<AttackController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Time.time - timer > attackController.GetLaserDuration())
+        if (!simulation.IsSimulationRunning())
+        {
+            return;
+        }
+
+        if (Time.time - timer > attackController.GetLaserDuration())
         {
             gameObject.SetActive(false);
         }
@@ -34,5 +47,15 @@ public class LaserScript : MonoBehaviour
     {
         timer = Time.time;
         LaserAudio.Play();
+    }
+
+    public void StartSimulationGO()
+    {
+        timer = Time.time - gameState.timerDifference;
+    }
+
+    public void PauseSimulationGO()
+    {
+        gameState.timerDifference = Time.time - timer;
     }
 }

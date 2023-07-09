@@ -8,7 +8,14 @@ public class IndicatorScript : MonoBehaviour
 
     private AttackController attackController;
 
+    private Simulation simulation;
     private float timer;
+    private GameState gameState;
+
+    private struct GameState
+    {
+        public float timerDifference;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +25,7 @@ public class IndicatorScript : MonoBehaviour
 
     void Awake()
     {
+        simulation = GameObject.FindObjectOfType<Simulation>();
         attackController = GameObject.FindObjectOfType<AttackController>();
         timer = Time.time + 15f;
     }
@@ -25,6 +33,11 @@ public class IndicatorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!simulation.IsSimulationRunning())
+        {
+            return;
+        }
+
         if (Time.time - timer > attackController.GetIndicatorDuration())
         {
             laser.gameObject.SetActive(true);
@@ -36,5 +49,15 @@ public class IndicatorScript : MonoBehaviour
     public void SetTimer()
     {
         timer = Time.time;
+    }
+
+    public void StartSimulationGO()
+    {
+        timer = Time.time - gameState.timerDifference;
+    }
+
+    public void PauseSimulationGO()
+    {
+        gameState.timerDifference = Time.time - timer;
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Image hpBar;
+    public Image pauseImage;
 
     // Start is called before the first frame update
     void Start()
@@ -24,5 +25,15 @@ public class UIManager : MonoBehaviour
         float hpFraction = (float) hitPoints / (float) maxHP;
         hpFraction = Mathf.Clamp01(hpFraction);
         hpBar.fillAmount = hpFraction;
+    }
+
+    public void ShowPauseImage()
+    {
+        pauseImage.gameObject.SetActive(true);
+    }
+
+    public void HidePauseImage()
+    {
+        pauseImage.gameObject.SetActive(false);
     }
 }
