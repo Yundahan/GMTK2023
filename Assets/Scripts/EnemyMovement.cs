@@ -13,7 +13,7 @@ public class EnemyMovement : MonoBehaviour
     public float DIRECTION_CHANGE_CD = 2f;
     public SpriteRenderer spriteRenderer;
 
-    private float INVULNERABILITY_TIME = 0.96f;
+    private float INVULNERABILITY_TIME = 0.5f;
 
     private GameObject player;
     private Simulation simulation;

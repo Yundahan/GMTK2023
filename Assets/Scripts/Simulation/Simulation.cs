@@ -18,6 +18,7 @@ public class Simulation : MonoBehaviour
     private float PLAYING_FIELD_WIDTH = 18f;
     private float BOUNDS_VERTICAL = 4f;
     private float BOUNDS_HORIZONTAL = 8f;
+    private float LEVEL_END_TIME = 1f;
 
     public GameObject enemyPrefab;
     public GameObject areaPrefab;
@@ -33,8 +34,10 @@ public class Simulation : MonoBehaviour
 
     private float enemyTimer;
     private float healAreaTimer;
+    private float levelFinishedTimer;
     private int kills = 0;
     private bool simulationRunning = true;
+    private bool levelFinished = false;
     private GameState gameState;
 
     static float audioTimer;
@@ -60,6 +63,11 @@ public class Simulation : MonoBehaviour
 
     void Update()
     {
+        if(levelFinished && Time.time - levelFinishedTimer > LEVEL_END_TIME)
+        {
+            NextScene();
+        }
+
         bool started = false;
 
         if (Input.GetKeyDown(KeyCode.Space) && !IsSimulationRunning())
@@ -171,6 +179,11 @@ public class Simulation : MonoBehaviour
 
     public void StartSimulation()
     {
+        if(levelFinished)
+        {
+            return;
+        }
+
         simulationRunning = true;
         uiManager.HidePauseImage();
         enemyTimer = Time.time - gameState.enemyTimerDifference;
@@ -187,6 +200,13 @@ public class Simulation : MonoBehaviour
         gameState.healAreaTimerDifference = Time.time - healAreaTimer;
         attackController.PauseSimulationGO();
         BroadcastAll("PauseSimulationGO");
+    }
+
+    public void EndLevel()
+    {
+        levelFinished = true;
+        levelFinishedTimer = Time.time;
+        simulationRunning = false;
     }
 
     public void NextScene()
