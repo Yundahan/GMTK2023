@@ -25,7 +25,6 @@ public class Simulation : MonoBehaviour
     public AudioSource audioSource;
 
     public TextMeshProUGUI killcount;
-    public TextMeshProUGUI savedcount;
 
     private UIManager uiManager;
     private AttackController attackController;
@@ -35,12 +34,12 @@ public class Simulation : MonoBehaviour
     private float enemyTimer;
     private float healAreaTimer;
     private int kills = 0;
-    private int saves = 0;
     private bool simulationRunning = true;
     private GameState gameState;
 
     static float audioTimer;
     static float audioVolumeValue = 0.1F;
+    static List<int> killCountList = new List<int>();
 
     public Slider slider;
 
@@ -100,12 +99,7 @@ public class Simulation : MonoBehaviour
 
     public void UpdateCounts(bool saved)
     {
-        if(saved)
-        {
-            saves++;
-            savedcount.text = saves.ToString();
-        }
-        else
+        if(!saved)
         {
             kills++;
             killcount.text = kills.ToString();
@@ -199,6 +193,8 @@ public class Simulation : MonoBehaviour
     {
         audioVolumeValue = slider.value;
         audioTimer = audioSource.time;
+        killCountList.Add(kills);
+
         StartCoroutine(LoadNextScene());
     }
 
@@ -211,6 +207,12 @@ public class Simulation : MonoBehaviour
     {
         return audioVolumeValue;
     }
+
+    public List<int> GetKillCountList()
+    {
+        return killCountList;
+    }
+
     IEnumerator LoadNextScene()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(nextLevel);
