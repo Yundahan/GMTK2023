@@ -70,7 +70,7 @@ public class HealAreaScript : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collider)
     {
-        if (simulation.IsSimulationRunning())
+        if (!simulation.IsSimulationRunning())
         {
             return;
         }
