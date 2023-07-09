@@ -176,6 +176,7 @@ MonoBehaviour:
   KILL_DISTANCE: 1
   MAX_DIRECTION_ROTATION: 20
   DIRECTION_CHANGE_CD: 2
+  spriteRenderer: {fileID: 8491539432898328691}
 --- !u!95 &1733497736395603195
 Animator:
   serializedVersion: 5

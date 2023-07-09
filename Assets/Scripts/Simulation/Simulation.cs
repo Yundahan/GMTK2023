@@ -4,6 +4,7 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Simulation : MonoBehaviour
 {
@@ -21,8 +22,13 @@ public class Simulation : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject areaPrefab;
 
+    public AudioSource audioSource;
+
     public TextMeshProUGUI killcount;
     public TextMeshProUGUI savedcount;
+
+    private UIManager uiManager;
+    private AttackController attackController;
 
     public string nextLevel;
 
@@ -30,15 +36,44 @@ public class Simulation : MonoBehaviour
     private float healAreaTimer;
     private int kills = 0;
     private int saves = 0;
+    private bool simulationRunning = true;
+    private GameState gameState;
+
+    static float audioTimer;
+    static float audioVolumeValue = 0.1F;
+
+    public Slider slider;
+
+    private struct GameState
+    {
+        public float enemyTimerDifference;
+        public float healAreaTimerDifference;
+    }
 
     void Awake()
     {
         enemyTimer = Time.time + ENEMY_SPAWN_CD;
         healAreaTimer = Time.time + HEAL_AREA_CD;
+        uiManager = GameObject.FindObjectOfType<UIManager>();
+        attackController = GameObject.FindObjectOfType<AttackController>();
+
     }
 
     void Update()
     {
+        bool started = false;
+
+        if (Input.GetKeyDown(KeyCode.Space) && !IsSimulationRunning())
+        {
+            StartSimulation();
+            started = true;
+        }
+
+        if (!IsSimulationRunning())
+        {
+            return;
+        }
+
         if (Time.time - enemyTimer > ENEMY_SPAWN_CD)
         {
             enemyTimer = Time.time;
@@ -55,6 +90,11 @@ public class Simulation : MonoBehaviour
             Vector3 areaPosition = new Vector3(Random.Range(-BOUNDS_HORIZONTAL, BOUNDS_HORIZONTAL), Random.Range(-BOUNDS_VERTICAL, BOUNDS_VERTICAL), 0);
             GameObject healArea = Instantiate(areaPrefab, areaPosition, Quaternion.identity);
             healArea.GetComponent<HealAreaScript>().StartIndicator();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && IsSimulationRunning() &&!started)
+        {
+            PauseSimulation();
         }
     }
 
@@ -100,12 +140,77 @@ public class Simulation : MonoBehaviour
             }
         }
     }
+    public static void BroadcastAll(string methodName)
+    {
+        GameObject[] gameObjects = (GameObject[])GameObject.FindObjectsOfType(typeof(GameObject));
+
+        foreach (GameObject gameObject in gameObjects)
+        {
+            EnemyMovement enemyMovement = gameObject.GetComponent<EnemyMovement>();
+            HealAreaScript healArea = gameObject.GetComponent<HealAreaScript>();
+            IndicatorScript indicator = gameObject.GetComponent<IndicatorScript>();
+            LaserScript laser = gameObject.GetComponent<LaserScript>();
+
+            if (enemyMovement != null)
+            {
+                enemyMovement.SendMessage(methodName);
+            }
+            if (healArea != null)
+            {
+                healArea.SendMessage(methodName);
+            }
+            if (indicator != null)
+            {
+                indicator.SendMessage(methodName);
+            }
+            if (laser != null)
+            {
+                laser.SendMessage(methodName);
+            }
+        }
+    }
+
+    public bool IsSimulationRunning()
+    {
+        return simulationRunning;
+    }
+
+    public void StartSimulation()
+    {
+        simulationRunning = true;
+        uiManager.HidePauseImage();
+        enemyTimer = Time.time - gameState.enemyTimerDifference;
+        healAreaTimer = Time.time - gameState.healAreaTimerDifference;
+        attackController.StartSimulationGO();
+        BroadcastAll("StartSimulationGO");
+    }
+
+    public void PauseSimulation()
+    {
+        simulationRunning = false;
+        uiManager.ShowPauseImage();
+        gameState.enemyTimerDifference = Time.time - enemyTimer;
+        gameState.healAreaTimerDifference = Time.time - healAreaTimer;
+        attackController.PauseSimulationGO();
+        BroadcastAll("PauseSimulationGO");
+    }
 
     public void NextScene()
     {
+        audioVolumeValue = slider.value;
+        audioTimer = audioSource.time;
         StartCoroutine(LoadNextScene());
     }
 
+    public float GetAudioTimer()
+    {
+        return audioTimer;
+    }
+
+    public float GetAudioVolumeValue()
+    {
+        return audioVolumeValue;
+    }
     IEnumerator LoadNextScene()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(nextLevel);

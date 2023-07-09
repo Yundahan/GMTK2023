@@ -14,6 +14,8 @@ public class VolumeSlider : MonoBehaviour
     [SerializeField]
     private AudioMixMode MixMode;
 
+    private Simulation simulation;
+
 
     public void OnChangeSlider (float value)
     {
@@ -29,8 +31,10 @@ public class VolumeSlider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        simulation = GameObject.FindObjectOfType<Simulation>();
         Slider slider = GetComponent<Slider>();
-        SetVolume(slider.value);
+        slider.value = simulation.GetAudioVolumeValue();
+        //SetVolume(simulation.GetAudioVolumeValue());
     }
 
     // Update is called once per frame

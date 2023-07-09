@@ -11,6 +11,7 @@ public class EnemyMovement : MonoBehaviour
     public float KILL_DISTANCE = 1f;
     public float MAX_DIRECTION_ROTATION = 20f;
     public float DIRECTION_CHANGE_CD = 2f;
+    public SpriteRenderer spriteRenderer;
 
     private float BOUNDS_VERTICAL = 4f;
     private float BOUNDS_HORIZONTAL = 8f;
@@ -21,6 +22,12 @@ public class EnemyMovement : MonoBehaviour
     private float directionTimer;
     private int healValue = 10;
     private int damageValue = -5;
+    private GameState gameState;
+
+    private struct GameState
+    {
+        public float directionTimerDifference;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -33,12 +40,17 @@ public class EnemyMovement : MonoBehaviour
         simulation = GameObject.FindObjectOfType<Simulation>();
         player = GameObject.FindObjectOfType<MovementController>().gameObject;
         directionTimer = Time.time;
-        movementVector = player.transform.position - this.transform.position;
+        ChangeMovement(player.transform.position - this.transform.position);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!simulation.IsSimulationRunning())
+        {
+            return;
+        }
+
         Vector3 playerVector = player.transform.position - this.transform.position;
 
         if (playerVector.magnitude < KILL_DISTANCE) {
@@ -49,7 +61,7 @@ public class EnemyMovement : MonoBehaviour
         {
             directionTimer = Time.time;
 
-            movementVector = playerVector;
+            ChangeMovement(playerVector);
         }
 
         this.transform.position += SPEED * movementVector.normalized * Time.deltaTime;
@@ -93,6 +105,20 @@ public class EnemyMovement : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void ChangeMovement(Vector3 newMovementVector)
+    {
+        movementVector = newMovementVector;
+
+        if (movementVector.x > 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
+    }
+
     public int GetHealValue(int value)
     {
         return healValue;
@@ -111,5 +137,15 @@ public class EnemyMovement : MonoBehaviour
     public void SetDamageValue(int value)
     {
         this.damageValue = value;
+    }
+
+    public void StartSimulationGO()
+    {
+        directionTimer = Time.time - gameState.directionTimerDifference;
+    }
+
+    public void PauseSimulationGO()
+    {
+        gameState.directionTimerDifference = Time.time - directionTimer;
     }
 }
