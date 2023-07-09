@@ -1089,9 +1089,11 @@ MonoBehaviour:
   HEAL_AREAS_ACTIVE: 0
   enemyPrefab: {fileID: 5910619964777669929, guid: 2fc30196ccc742946a9d7c052e5a1f76, type: 3}
   areaPrefab: {fileID: 2835443374175443413, guid: 390ae9b4e26984346a19e1d3de8a6124, type: 3}
+  audioSource: {fileID: 1376090510}
   killcount: {fileID: 29799073}
   savedcount: {fileID: 263575269}
   nextLevel: TestLevel04
+  slider: {fileID: 1110854799}
 --- !u!1 &566557960
 GameObject:
   m_ObjectHideFlags: 0
@@ -1827,7 +1829,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 819d7a5c09da6e74db6b9c42791cf7d5, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 6049a9792805ad24e840900d8c561db9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8fc2ff5bcb6f41a4f829e16589f5fe3d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1940,7 +1942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c0fb75db01b554087e1889a420dd42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  songStart: {fileID: 8300000, guid: 0570028b68fa2a94b9ce29064c6b24aa, type: 3}
+  songStart: {fileID: 8300000, guid: c5a03d159a392bf45aa28ef43cdce4d5, type: 3}
   songLoop: {fileID: 1376090510}
   introToggle: 1
   rndSongTime: 0

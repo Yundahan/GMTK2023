@@ -4,6 +4,7 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Simulation : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class Simulation : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject areaPrefab;
 
+    public AudioSource audioSource;
+
     public TextMeshProUGUI killcount;
     public TextMeshProUGUI savedcount;
 
@@ -36,6 +39,11 @@ public class Simulation : MonoBehaviour
     private bool simulationRunning = true;
     private GameState gameState;
 
+    static float audioTimer;
+    static float audioVolumeValue = 0.1F;
+
+    public Slider slider;
+
     private struct GameState
     {
         public float enemyTimerDifference;
@@ -48,6 +56,7 @@ public class Simulation : MonoBehaviour
         healAreaTimer = Time.time + HEAL_AREA_CD;
         uiManager = GameObject.FindObjectOfType<UIManager>();
         attackController = GameObject.FindObjectOfType<AttackController>();
+
     }
 
     void Update()
@@ -188,9 +197,20 @@ public class Simulation : MonoBehaviour
 
     public void NextScene()
     {
+        audioVolumeValue = slider.value;
+        audioTimer = audioSource.time;
         StartCoroutine(LoadNextScene());
     }
 
+    public float GetAudioTimer()
+    {
+        return audioTimer;
+    }
+
+    public float GetAudioVolumeValue()
+    {
+        return audioVolumeValue;
+    }
     IEnumerator LoadNextScene()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(nextLevel);

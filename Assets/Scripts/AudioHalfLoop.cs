@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,9 @@ public class AudioHalfLoop : MonoBehaviour
 
     public float rndSongTime;
 
+    private Simulation simulation;
+
+
     void Start()
     {
         /*songStart.Play();
@@ -20,9 +24,18 @@ public class AudioHalfLoop : MonoBehaviour
         songLoop.Pause();
         */
     
-     
-        songLoop.PlayOneShot(songStart);
-        songLoop.PlayScheduled(AudioSettings.dspTime + songStart.length);
+        if (introToggle)
+        {
+            songLoop.PlayOneShot(songStart);
+            songLoop.PlayScheduled(AudioSettings.dspTime + songStart.length);
+        }
+        else
+        {
+            simulation = GameObject.FindObjectOfType<Simulation>();
+            songLoop.time = simulation.GetAudioTimer();
+            songLoop.Play();
+        }
+       
         
 
     }
