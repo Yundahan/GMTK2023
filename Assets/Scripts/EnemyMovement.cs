@@ -22,6 +22,12 @@ public class EnemyMovement : MonoBehaviour
     private float directionTimer;
     private int healValue = 10;
     private int damageValue = -5;
+    private GameState gameState;
+
+    private struct GameState
+    {
+        public float directionTimerDifference;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +46,11 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!simulation.IsSimulationRunning())
+        {
+            return;
+        }
+
         Vector3 playerVector = player.transform.position - this.transform.position;
 
         if (playerVector.magnitude < KILL_DISTANCE) {
@@ -121,5 +132,15 @@ public class EnemyMovement : MonoBehaviour
     public void SetDamageValue(int value)
     {
         this.damageValue = value;
+    }
+
+    public void StartSimulationGO()
+    {
+        directionTimer = Time.time - gameState.directionTimerDifference;
+    }
+
+    public void PauseSimulationGO()
+    {
+        gameState.directionTimerDifference = Time.time - directionTimer;
     }
 }

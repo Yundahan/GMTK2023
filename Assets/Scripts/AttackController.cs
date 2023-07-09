@@ -25,6 +25,13 @@ public class AttackController : MonoBehaviour
     private float lastIndicatorTime;
     private float lastShotTime;
     private int hitPoints;
+    private GameState gameState;
+
+    private struct GameState
+    {
+        public float lastIndicatorTimeDifference;
+        public float lastShotTimeDifference;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +51,11 @@ public class AttackController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!simulation.IsSimulationRunning())
+        {
+            return;
+        }
+
         if(Time.time - lastIndicatorTime > ATTACK_CD)
         {
             lastIndicatorTime = Time.time;
@@ -112,5 +124,17 @@ public class AttackController : MonoBehaviour
         {
             simulation.NextScene();
         }
+    }
+
+    public void StartSimulationGO()
+    {
+        lastIndicatorTime = Time.time - gameState.lastIndicatorTimeDifference;
+        lastShotTime = Time.time - gameState.lastShotTimeDifference;
+    }
+
+    public void PauseSimulationGO()
+    {
+        gameState.lastIndicatorTimeDifference = Time.time - lastIndicatorTime;
+        gameState.lastShotTimeDifference = Time.time - lastShotTime;
     }
 }
