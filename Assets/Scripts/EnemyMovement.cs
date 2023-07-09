@@ -13,13 +13,13 @@ public class EnemyMovement : MonoBehaviour
     public float DIRECTION_CHANGE_CD = 2f;
     public SpriteRenderer spriteRenderer;
 
-    private float BOUNDS_VERTICAL = 4f;
-    private float BOUNDS_HORIZONTAL = 8f;
+    private float INVULNERABILITY_TIME = 0.96f;
 
     private GameObject player;
     private Simulation simulation;
     private Vector3 movementVector;
     private float directionTimer;
+    private float invulnerabilityTimer;
     private int healValue = 10;
     private int damageValue = -5;
     private GameState gameState;
@@ -27,6 +27,7 @@ public class EnemyMovement : MonoBehaviour
     private struct GameState
     {
         public float directionTimerDifference;
+        public float invulnerabilityTimerDifference;
     }
 
     // Start is called before the first frame update
@@ -39,7 +40,7 @@ public class EnemyMovement : MonoBehaviour
     {
         simulation = GameObject.FindObjectOfType<Simulation>();
         player = GameObject.FindObjectOfType<MovementController>().gameObject;
-        directionTimer = Time.time;
+        directionTimer = Time.time; invulnerabilityTimer = Time.time;
         ChangeMovement(player.transform.position - this.transform.position);
     }
 
@@ -71,23 +72,15 @@ public class EnemyMovement : MonoBehaviour
     {
         LaserScript laser = collider.gameObject.GetComponent<LaserScript>();
 
-        if (laser != null && !CheckOutOfBounds())
+        if (laser != null && CheckDamageable())
         {
             this.Kill(false);
         }
     }
-    private bool CheckOutOfBounds()
-    {
-        if (this.transform.position.x < -BOUNDS_HORIZONTAL || this.transform.position.x > BOUNDS_HORIZONTAL)
-        {
-            return true;
-        }
-        if (this.transform.position.y < -BOUNDS_VERTICAL || this.transform.position.y > BOUNDS_VERTICAL)
-        {
-            return true;
-        }
 
-        return false;
+    private bool CheckDamageable()
+    {
+        return Time.time - invulnerabilityTimer > INVULNERABILITY_TIME;
     }
 
     private void Kill(bool saved)
@@ -142,10 +135,12 @@ public class EnemyMovement : MonoBehaviour
     public void StartSimulationGO()
     {
         directionTimer = Time.time - gameState.directionTimerDifference;
+        invulnerabilityTimer = Time.time - gameState.invulnerabilityTimerDifference;
     }
 
     public void PauseSimulationGO()
     {
         gameState.directionTimerDifference = Time.time - directionTimer;
+        gameState.invulnerabilityTimerDifference = Time.time - invulnerabilityTimer;
     }
 }

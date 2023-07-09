@@ -6,8 +6,8 @@ public class MovementController : MonoBehaviour
 {
     public float SPEED = 0.015f;
 
-    private float BOUNDS_VERTICAL = 4f;
-    private float BOUNDS_HORIZONTAL = 8f;
+    private float BOUNDS_VERTICAL = 4.7f;
+    private float BOUNDS_HORIZONTAL = 9f;
 
     private Simulation simulation;
     private SpriteRenderer spriteRenderer;
