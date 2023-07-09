@@ -32,18 +32,30 @@ public class MovementController : MonoBehaviour
             return;
         }
 
-        float deltaX = SPEED * Input.GetAxisRaw("Horizontal") * Time.deltaTime;
+        float horizontalAxis = Input.GetAxisRaw("Horizontal");
+        float verticalAxis = Input.GetAxisRaw("Vertical");
+
+        float deltaX = SPEED * horizontalAxis * Time.deltaTime;
         float newX = this.transform.position.x + deltaX;
-        float newY = this.transform.position.y + SPEED * Input.GetAxisRaw("Vertical") * Time.deltaTime;
+        float newY = this.transform.position.y + SPEED * verticalAxis * Time.deltaTime;
         this.transform.position = new Vector3(Mathf.Clamp(newX, -BOUNDS_HORIZONTAL, BOUNDS_HORIZONTAL), Mathf.Clamp(newY, -BOUNDS_VERTICAL, BOUNDS_VERTICAL), 0);
 
-        if(Input.GetAxisRaw("Horizontal") == 1)
+        if(horizontalAxis == 1)
         {
             spriteRenderer.flipX = true;
         }
-        else if(Input.GetAxisRaw("Horizontal") == -1)
+        else if(horizontalAxis == -1)
         {
             spriteRenderer.flipX = false;
+        }
+
+        if(horizontalAxis == 0 && verticalAxis == 0)
+        {
+            GetComponent<Animator>().enabled = false;
+        }
+        else
+        {
+            GetComponent<Animator>().enabled = true;
         }
     }
 }
