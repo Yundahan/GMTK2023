@@ -462,8 +462,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 46abd166bf801d54a94c09342420def0, type: 2}
+  m_sharedMaterial: {fileID: -4702500124886461594, guid: 46abd166bf801d54a94c09342420def0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -751,9 +751,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ENEMY_SPAWN_CD: 1
+  HEAL_AREA_CD: 2
+  HEAL_VALUE: 10
+  DAMAGE_VALUE: -5
+  HEAL_AREAS_ACTIVE: 0
   enemyPrefab: {fileID: 5910619964777669929, guid: 2fc30196ccc742946a9d7c052e5a1f76, type: 3}
+  areaPrefab: {fileID: 0}
+  audioSource: {fileID: 0}
   killcount: {fileID: 29799073}
-  savedcount: {fileID: 263575269}
+  nextLevel: 
+  slider: {fileID: 0}
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1943,12 +1950,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   INITIAL_ATTACK_CD: 0.72
   ATTACK_CD: 0.96
+  INDICATOR_DURATION: 0.3
   LASER_DURATION: 0.2
   MAX_HP: 100
-  bulletPrefab: {fileID: 7596374221931106551, guid: fa7d7dbb708b840408365551ebafe418, type: 3}
-  laserV: {fileID: 56399841}
-  laserH: {fileID: 587161491}
-  uiManager: {fileID: 0}
+  laserMode: 0
+  alternateShotDirection: 0
+  indicatorV: {fileID: 0}
+  indicatorH: {fileID: 0}
+  indicatorDV: {fileID: 0}
+  indicatorDH: {fileID: 0}
 --- !u!114 &1832783310
 MonoBehaviour:
   m_ObjectHideFlags: 0
