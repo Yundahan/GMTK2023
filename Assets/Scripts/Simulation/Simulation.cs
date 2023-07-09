@@ -18,6 +18,7 @@ public class Simulation : MonoBehaviour
     private float PLAYING_FIELD_WIDTH = 18f;
     private float BOUNDS_VERTICAL = 4f;
     private float BOUNDS_HORIZONTAL = 8f;
+    private float LEVEL_END_TIME = 1f;
 
     public GameObject enemyPrefab;
     public GameObject areaPrefab;
@@ -25,7 +26,6 @@ public class Simulation : MonoBehaviour
     public AudioSource audioSource;
 
     public TextMeshProUGUI killcount;
-    public TextMeshProUGUI savedcount;
 
     private UIManager uiManager;
     private AttackController attackController;
@@ -34,13 +34,15 @@ public class Simulation : MonoBehaviour
 
     private float enemyTimer;
     private float healAreaTimer;
+    private float levelFinishedTimer;
     private int kills = 0;
-    private int saves = 0;
     private bool simulationRunning = true;
+    private bool levelFinished = false;
     private GameState gameState;
 
     static float audioTimer;
     static float audioVolumeValue = 0.1F;
+    static List<int> killCountList = new List<int>();
 
     public Slider slider;
 
@@ -61,6 +63,11 @@ public class Simulation : MonoBehaviour
 
     void Update()
     {
+        if(levelFinished && Time.time - levelFinishedTimer > LEVEL_END_TIME)
+        {
+            NextScene();
+        }
+
         bool started = false;
 
         if (Input.GetKeyDown(KeyCode.Space) && !IsSimulationRunning())
@@ -100,12 +107,7 @@ public class Simulation : MonoBehaviour
 
     public void UpdateCounts(bool saved)
     {
-        if(saved)
-        {
-            saves++;
-            savedcount.text = saves.ToString();
-        }
-        else
+        if(!saved)
         {
             kills++;
             killcount.text = kills.ToString();
@@ -177,6 +179,11 @@ public class Simulation : MonoBehaviour
 
     public void StartSimulation()
     {
+        if(levelFinished)
+        {
+            return;
+        }
+
         simulationRunning = true;
         uiManager.HidePauseImage();
         enemyTimer = Time.time - gameState.enemyTimerDifference;
@@ -195,10 +202,19 @@ public class Simulation : MonoBehaviour
         BroadcastAll("PauseSimulationGO");
     }
 
+    public void EndLevel()
+    {
+        levelFinished = true;
+        levelFinishedTimer = Time.time;
+        simulationRunning = false;
+    }
+
     public void NextScene()
     {
         audioVolumeValue = slider.value;
         audioTimer = audioSource.time;
+        killCountList.Add(kills);
+
         StartCoroutine(LoadNextScene());
     }
 
@@ -211,6 +227,12 @@ public class Simulation : MonoBehaviour
     {
         return audioVolumeValue;
     }
+
+    public List<int> GetKillCountList()
+    {
+        return killCountList;
+    }
+
     IEnumerator LoadNextScene()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(nextLevel);
