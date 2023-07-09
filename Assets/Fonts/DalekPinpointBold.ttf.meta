@@ -10,8 +10,7 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontNames:
   - Dalek Pinpoint
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: 88006019af8398241adcac6a9d8b031e, type: 3}
+  fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
