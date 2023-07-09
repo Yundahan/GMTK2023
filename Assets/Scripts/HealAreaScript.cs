@@ -10,8 +10,15 @@ public class HealAreaScript : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
 
+    private Simulation simulation;
     private float timer;
     private Phase phase = Phase.NONE;
+    private GameState gameState;
+
+    private struct GameState
+    {
+        public float timerDifference;
+    }
 
     private enum Phase
     {
@@ -27,9 +34,19 @@ public class HealAreaScript : MonoBehaviour
 
     }
 
+    void Awake()
+    {
+        simulation = GameObject.FindObjectOfType<Simulation>();
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if(!simulation.IsSimulationRunning())
+        {
+            return;
+        }
+
         if(Time.time - timer > INDICATOR_TIME && phase == Phase.INDICATOR)
         {
             timer = Time.time;
@@ -53,7 +70,12 @@ public class HealAreaScript : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collider)
     {
-        if(phase == Phase.ACTIVE)
+        if (simulation.IsSimulationRunning())
+        {
+            return;
+        }
+
+        if (phase == Phase.ACTIVE)
         {
             AttackController attackController = collider.gameObject.GetComponent<AttackController>();
 
@@ -63,5 +85,15 @@ public class HealAreaScript : MonoBehaviour
                 phase = Phase.SPENT;
             }
         }
+    }
+
+    public void StartSimulationGO()
+    {
+        timer = Time.time - gameState.timerDifference;
+    }
+
+    public void PauseSimulationGO()
+    {
+        gameState.timerDifference = Time.time - timer;
     }
 }
