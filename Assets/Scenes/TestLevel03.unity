@@ -1082,7 +1082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52a424252c2e75a4c921c6e69f3d4976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ENEMY_SPAWN_CD: 0.75
+  ENEMY_SPAWN_CD: 1
   HEAL_AREA_CD: 2
   HEAL_VALUE: 10
   DAMAGE_VALUE: -5
@@ -2347,7 +2347,7 @@ MonoBehaviour:
   INDICATOR_DURATION: 0.5
   LASER_DURATION: 0.2
   MAX_HP: 100
-  laserMode: 0
+  laserMode: 1
   alternateShotDirection: 0
   indicatorV: {fileID: 720872459}
   indicatorH: {fileID: 934977377}
