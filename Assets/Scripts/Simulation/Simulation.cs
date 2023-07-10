@@ -29,6 +29,7 @@ public class Simulation : MonoBehaviour
 
     private UIManager uiManager;
     private AttackController attackController;
+    private Slider slider;
 
     public string nextLevel;
 
@@ -44,8 +45,6 @@ public class Simulation : MonoBehaviour
     static float audioVolumeValue = 0.1F;
     static List<int> killCountList = new List<int>();
 
-    public Slider slider;
-
     private struct GameState
     {
         public float enemyTimerDifference;
@@ -58,7 +57,7 @@ public class Simulation : MonoBehaviour
         healAreaTimer = Time.time + HEAL_AREA_CD;
         uiManager = GameObject.FindObjectOfType<UIManager>();
         attackController = GameObject.FindObjectOfType<AttackController>();
-
+        slider = GameObject.FindObjectOfType<Slider>();
     }
 
     void Update()
