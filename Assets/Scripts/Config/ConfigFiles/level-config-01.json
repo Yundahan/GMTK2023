@@ -1,0 +1,10 @@
+{
+	"enemySpawnCD": 1.0,
+	"healAreaCD": 2.0,
+	"healValue": 10,
+	"damageValue": -5,
+	"healAreasActive": false,
+	"playerAttackCD": 1.92,
+	"laserMode": 0,
+	"alternateShotDirection": false
+}

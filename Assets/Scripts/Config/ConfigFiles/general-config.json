@@ -1,0 +1,9 @@
+{
+	"playingFieldHeight": 10.0,
+	"playingFieldWidth": 18.0,
+	"boundsVertical": 4.0,
+	"boundsHorizontal": 8.0,
+	"levelEndTime": 1.0,
+	"laserIndicatorDuration": 0.3,
+	"laserDuration": 0.2
+}

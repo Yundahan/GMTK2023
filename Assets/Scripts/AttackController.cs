@@ -7,12 +7,7 @@ using UnityEngine;
 public class AttackController : MonoBehaviour
 {
     public float INITIAL_ATTACK_CD = 2f;
-    public float ATTACK_CD = 1f;
-    public float INDICATOR_DURATION = 0.3f;
-    public float LASER_DURATION = 0.2f;
     public int MAX_HP = 100;
-    public int laserMode = 0; // 0 = +, 1 = x
-    public bool alternateShotDirection = false;
 
     public IndicatorScript indicatorV;
     public IndicatorScript indicatorH;
@@ -44,7 +39,7 @@ public class AttackController : MonoBehaviour
         uiManager = GameObject.FindObjectOfType<UIManager>();
         simulation = GameObject.FindObjectOfType<Simulation>();
         lastIndicatorTime = Time.time + INITIAL_ATTACK_CD;
-        lastShotTime = Time.time + ATTACK_CD + INITIAL_ATTACK_CD;
+        lastShotTime = Time.time + INITIAL_ATTACK_CD;
         this.SetHitpoints(MAX_HP);
     }
 
@@ -56,20 +51,20 @@ public class AttackController : MonoBehaviour
             return;
         }
 
-        if(Time.time - lastIndicatorTime > ATTACK_CD)
+        if(Time.time - lastIndicatorTime > simulation.GetLevelConfig().playerAttackCD)
         {
             lastIndicatorTime = Time.time;
 
-            if(laserMode == 0)
+            if(simulation.GetLevelConfig().laserMode == 0)
             {
                 indicatorV.gameObject.SetActive(true);
                 indicatorH.gameObject.SetActive(true);
                 indicatorV.SetTimer();
                 indicatorH.SetTimer();
 
-                if(alternateShotDirection)
+                if(simulation.GetLevelConfig().alternateShotDirection)
                 {
-                    laserMode = 1;
+                    simulation.GetLevelConfig().laserMode = 1;
                 }
             }
             else
@@ -79,28 +74,18 @@ public class AttackController : MonoBehaviour
                 indicatorDV.SetTimer();
                 indicatorDH.SetTimer();
 
-                if (alternateShotDirection)
+                if (simulation.GetLevelConfig().alternateShotDirection)
                 {
-                    laserMode = 0;
+                    simulation.GetLevelConfig().laserMode = 0;
                 }
             }
         }
 
         //when the indicator has fizzled, the shot starts so the time is updated
-        if(Time.time - lastIndicatorTime > INDICATOR_DURATION)
+        if(Time.time - lastIndicatorTime > simulation.GetGeneralConfig().laserIndicatorDuration)
         {
-            lastShotTime = lastIndicatorTime + INDICATOR_DURATION;
+            lastShotTime = lastIndicatorTime + simulation.GetGeneralConfig().laserIndicatorDuration;
         }
-    }
-
-    public float GetLaserDuration()
-    {
-        return LASER_DURATION;
-    }
-
-    public float GetIndicatorDuration()
-    {
-        return INDICATOR_DURATION;
     }
 
     public int GetHitpoints()

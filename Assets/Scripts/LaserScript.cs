@@ -6,8 +6,6 @@ public class LaserScript : MonoBehaviour
 {
     public AudioSource LaserAudio;
 
-    private AttackController attackController;
-
     private Simulation simulation;
     private float timer;
     private GameState gameState;
@@ -26,7 +24,6 @@ public class LaserScript : MonoBehaviour
     private void Awake()
     {
         simulation = GameObject.FindObjectOfType<Simulation>();
-        attackController = this.transform.parent.GetComponent<AttackController>();
     }
 
     // Update is called once per frame
@@ -37,7 +34,7 @@ public class LaserScript : MonoBehaviour
             return;
         }
 
-        if (Time.time - timer > attackController.GetLaserDuration())
+        if (Time.time - timer > simulation.GetGeneralConfig().laserDuration)
         {
             gameObject.SetActive(false);
         }

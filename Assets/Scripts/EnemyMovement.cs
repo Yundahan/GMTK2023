@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -9,7 +8,6 @@ public class EnemyMovement : MonoBehaviour
 {
     public float SPEED = 2f;
     public float KILL_DISTANCE = 1f;
-    public float MAX_DIRECTION_ROTATION = 20f;
     public float DIRECTION_CHANGE_CD = 2f;
     public SpriteRenderer spriteRenderer;
 

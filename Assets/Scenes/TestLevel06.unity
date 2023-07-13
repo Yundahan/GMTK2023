@@ -597,6 +597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpBar: {fileID: 409199976}
   pauseImage: {fileID: 244961127}
+  killcount: {fileID: 1280262212}
 --- !u!114 &486281083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -878,17 +879,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52a424252c2e75a4c921c6e69f3d4976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ENEMY_SPAWN_CD: 1
-  HEAL_AREA_CD: 2
-  HEAL_VALUE: 10
-  DAMAGE_VALUE: -5
-  HEAL_AREAS_ACTIVE: 0
   enemyPrefab: {fileID: 5910619964777669929, guid: 2fc30196ccc742946a9d7c052e5a1f76, type: 3}
   areaPrefab: {fileID: 2835443374175443413, guid: 390ae9b4e26984346a19e1d3de8a6124, type: 3}
-  audioSource: {fileID: 1376090510}
-  killcount: {fileID: 1280262212}
+  bgmAudioSource: {fileID: 1376090510}
+  levelConfigFileName: level-config-06
   nextLevel: TestLevel07
-  slider: {fileID: 2057732717}
 --- !u!1 &538216352
 GameObject:
   m_ObjectHideFlags: 0
@@ -1133,12 +1128,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   INITIAL_ATTACK_CD: 0
-  ATTACK_CD: 1.44
   INDICATOR_DURATION: 0.5
   LASER_DURATION: 0.2
   MAX_HP: 100
-  laserMode: 0
-  alternateShotDirection: 1
   indicatorV: {fileID: 1363914814}
   indicatorH: {fileID: 1561230503}
   indicatorDV: {fileID: 330288357}

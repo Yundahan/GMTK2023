@@ -6,8 +6,6 @@ public class IndicatorScript : MonoBehaviour
 {
     public LaserScript laser;
 
-    private AttackController attackController;
-
     private Simulation simulation;
     private float timer;
     private GameState gameState;
@@ -26,7 +24,6 @@ public class IndicatorScript : MonoBehaviour
     void Awake()
     {
         simulation = GameObject.FindObjectOfType<Simulation>();
-        attackController = GameObject.FindObjectOfType<AttackController>();
         timer = Time.time + 15f;
     }
 
@@ -38,7 +35,7 @@ public class IndicatorScript : MonoBehaviour
             return;
         }
 
-        if (Time.time - timer > attackController.GetIndicatorDuration())
+        if (Time.time - timer > simulation.GetGeneralConfig().laserIndicatorDuration)
         {
             laser.gameObject.SetActive(true);
             laser.SetTimer();
