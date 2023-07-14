@@ -42,16 +42,21 @@ public class MovementController : MonoBehaviour
         float newY = this.transform.position.y + SPEED * verticalAxis * Time.deltaTime;
         this.transform.position = new Vector3(Mathf.Clamp(newX, -BOUNDS_HORIZONTAL, BOUNDS_HORIZONTAL), Mathf.Clamp(newY, -BOUNDS_VERTICAL, BOUNDS_VERTICAL), 0);
 
-        if(horizontalAxis == 1)
+        UpdateVisuals((int)Mathf.Round(horizontalAxis), (int)Mathf.Round(verticalAxis));
+    }
+
+    private void UpdateVisuals(int horizontalAxis, int verticalAxis)
+    {
+        if (horizontalAxis == 1)
         {
             spriteRenderer.flipX = true;
         }
-        else if(horizontalAxis == -1)
+        else if (horizontalAxis == -1)
         {
             spriteRenderer.flipX = false;
         }
 
-        if(horizontalAxis == 0 && verticalAxis == 0)
+        if (horizontalAxis == 0 && verticalAxis == 0)
         {
             animator.enabled = false;
         }
