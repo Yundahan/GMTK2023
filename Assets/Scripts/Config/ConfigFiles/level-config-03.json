@@ -1,4 +1,5 @@
 {
+	"nextLevelName": "TestLevel04",
 	"enemySpawnCD": 1.0,
 	"healAreaCD": 2.0,
 	"healValue": 10,
@@ -6,5 +7,8 @@
 	"healAreasActive": false,
 	"playerAttackCD": 0.96,
 	"laserMode": 1,
-	"alternateShotDirection": false
+	"alternateShotDirection": false,
+	"healAreaHealAmount": 20,
+	"enemySpeed": 2.0,
+	"playerSpeed": 5.0
 }

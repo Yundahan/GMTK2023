@@ -6,20 +6,14 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public float SPEED = 2f;
-    public float KILL_DISTANCE = 1f;
-    public float DIRECTION_CHANGE_CD = 2f;
-    public SpriteRenderer spriteRenderer;
-
-    private float INVULNERABILITY_TIME = 0.5f;
-
     private GameObject player;
     private Simulation simulation;
+    private SpriteRenderer spriteRenderer;
     private Vector3 movementVector;
     private float directionTimer;
     private float invulnerabilityTimer;
-    private int healValue = 10;
-    private int damageValue = -5;
+    private int healValue;
+    private int damageValue;
     private GameState gameState;
 
     private struct GameState
@@ -38,6 +32,7 @@ public class EnemyMovement : MonoBehaviour
     {
         simulation = GameObject.FindObjectOfType<Simulation>();
         player = GameObject.FindObjectOfType<MovementController>().gameObject;
+        spriteRenderer = GetComponent<SpriteRenderer>();
         directionTimer = Time.time; invulnerabilityTimer = Time.time;
         ChangeMovement(player.transform.position - this.transform.position);
     }
@@ -52,18 +47,18 @@ public class EnemyMovement : MonoBehaviour
 
         Vector3 playerVector = player.transform.position - this.transform.position;
 
-        if (playerVector.magnitude < KILL_DISTANCE) {
+        if (playerVector.magnitude < simulation.GetGeneralConfig().enemyHitDistance) {
             this.Kill(true);
         }
 
-        if(Time.time - directionTimer > DIRECTION_CHANGE_CD)
+        if(Time.time - directionTimer > simulation.GetGeneralConfig().directionChangeCD)
         {
             directionTimer = Time.time;
 
             ChangeMovement(playerVector);
         }
 
-        this.transform.position += SPEED * movementVector.normalized * Time.deltaTime;
+        this.transform.position += simulation.GetLevelConfig().enemySpeed * movementVector.normalized * Time.deltaTime;
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -78,7 +73,7 @@ public class EnemyMovement : MonoBehaviour
 
     private bool CheckDamageable()
     {
-        return Time.time - invulnerabilityTimer > INVULNERABILITY_TIME;
+        return Time.time - invulnerabilityTimer > simulation.GetGeneralConfig().enemyInvulnerabilityTime;
     }
 
     private void Kill(bool saved)

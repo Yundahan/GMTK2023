@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class HealAreaScript : MonoBehaviour
 {
-    public float INDICATOR_TIME = 1f;
-    public float DURATION = 0.5f;
-    public int HEAL_VALUE = 20;
-
-    public SpriteRenderer spriteRenderer;
-
     private Simulation simulation;
+    private SpriteRenderer spriteRenderer;
     private float timer;
     private Phase phase = Phase.NONE;
     private GameState gameState;
@@ -37,6 +32,7 @@ public class HealAreaScript : MonoBehaviour
     void Awake()
     {
         simulation = GameObject.FindObjectOfType<Simulation>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -47,14 +43,14 @@ public class HealAreaScript : MonoBehaviour
             return;
         }
 
-        if(Time.time - timer > INDICATOR_TIME && phase == Phase.INDICATOR)
+        if(Time.time - timer > simulation.GetGeneralConfig().healAreaIndicatorDuration && phase == Phase.INDICATOR)
         {
             timer = Time.time;
 
             phase = Phase.ACTIVE;
             spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 1f);
         }
-        else if(Time.time - timer > DURATION && phase == Phase.ACTIVE || phase == Phase.SPENT)
+        else if(Time.time - timer > simulation.GetGeneralConfig().healAreaDuration && phase == Phase.ACTIVE || phase == Phase.SPENT)
         {
             Destroy(gameObject);
         }
@@ -81,7 +77,7 @@ public class HealAreaScript : MonoBehaviour
 
             if (attackController != null && phase == Phase.ACTIVE)
             {
-                attackController.ChangeHitpoints(HEAL_VALUE);
+                attackController.ChangeHitpoints(simulation.GetLevelConfig().healAreaHealAmount);
                 phase = Phase.SPENT;
             }
         }

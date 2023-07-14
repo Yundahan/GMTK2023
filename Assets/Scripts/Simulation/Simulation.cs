@@ -19,7 +19,6 @@ public class Simulation : MonoBehaviour
     private GeneralConfig generalConfig;
     private LevelConfig levelConfig;
     public string levelConfigFileName;
-    public string nextLevel;
 
     private float enemyTimer;
     private float healAreaTimer;
@@ -85,8 +84,8 @@ public class Simulation : MonoBehaviour
         {
             healAreaTimer = Time.time;
 
-            Vector3 areaPosition = new Vector3(Random.Range(-generalConfig.boundsHorizontal, generalConfig.boundsHorizontal),
-                Random.Range(-generalConfig.boundsVertical, generalConfig.boundsVertical), 0);
+            Vector3 areaPosition = new Vector3(Random.Range(-generalConfig.healAreaBoundsHorizontal, generalConfig.healAreaBoundsHorizontal),
+                Random.Range(-generalConfig.healAreaBoundsVertical, generalConfig.healAreaBoundsVertical), 0);
             GameObject healArea = Instantiate(areaPrefab, areaPosition, Quaternion.identity);
             healArea.GetComponent<HealAreaScript>().StartIndicator();
         }
@@ -228,6 +227,15 @@ public class Simulation : MonoBehaviour
         return killCountList;
     }
 
+    //this should be used only in awake or start functions, to be safe if the simulation awakes later than the script in question
+    public GeneralConfig ReloadGeneralConfig()
+    {
+        ConfigLoader configLoader = new ConfigLoader();
+        generalConfig = configLoader.LoadGeneralConfig();
+        return generalConfig;
+    }
+
+    //this should not be used in awake or start functions - use ReloadGeneralConfig instead
     public GeneralConfig GetGeneralConfig()
     {
         return generalConfig;
@@ -240,7 +248,7 @@ public class Simulation : MonoBehaviour
 
     IEnumerator LoadNextScene()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(nextLevel);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelConfig.nextLevelName);
 
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)

@@ -1,9 +1,18 @@
 {
 	"playingFieldHeight": 10.0,
 	"playingFieldWidth": 18.0,
-	"boundsVertical": 4.0,
-	"boundsHorizontal": 8.0,
+	"healAreaBoundsVertical": 4.0,
+	"healAreaBoundsHorizontal": 8.0,
+	"playerBoundsVertical": 4.7,
+	"playerBoundsHorizontal": 9.0,
 	"levelEndTime": 1.0,
 	"laserIndicatorDuration": 0.3,
-	"laserDuration": 0.2
+	"laserDuration": 0.2,
+	"healAreaIndicatorDuration": 1.0,
+	"healAreaDuration": 0.5,
+	"initialAttackCD": 0.0,
+	"playerMaxHP": 100,
+	"enemyHitDistance": 1.0,
+	"directionChangeCD": 2.0,
+	"enemyInvulnerabilityTime": 0.5
 }

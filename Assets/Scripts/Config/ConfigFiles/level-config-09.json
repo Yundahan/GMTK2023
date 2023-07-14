@@ -1,4 +1,5 @@
 {
+	"nextLevelName": "EndScreen",
 	"enemySpawnCD": 1.0,
 	"healAreaCD": 2.0,
 	"healValue": 10,
@@ -6,5 +7,8 @@
 	"healAreasActive": false,
 	"playerAttackCD": 0.72,
 	"laserMode": 0,
-	"alternateShotDirection": true
+	"alternateShotDirection": true,
+	"healAreaHealAmount": 20,
+	"enemySpeed": 2.0,
+	"playerSpeed": 5.0
 }

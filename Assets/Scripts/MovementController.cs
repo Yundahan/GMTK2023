@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    public float SPEED = 0.015f;
-
-    private float BOUNDS_VERTICAL = 4.7f;
-    private float BOUNDS_HORIZONTAL = 9f;
-
     private Simulation simulation;
     private SpriteRenderer spriteRenderer;
 
@@ -35,10 +30,12 @@ public class MovementController : MonoBehaviour
         float horizontalAxis = Input.GetAxisRaw("Horizontal");
         float verticalAxis = Input.GetAxisRaw("Vertical");
 
-        float deltaX = SPEED * horizontalAxis * Time.deltaTime;
+        float deltaX = simulation.GetLevelConfig().playerSpeed * horizontalAxis * Time.deltaTime;
         float newX = this.transform.position.x + deltaX;
-        float newY = this.transform.position.y + SPEED * verticalAxis * Time.deltaTime;
-        this.transform.position = new Vector3(Mathf.Clamp(newX, -BOUNDS_HORIZONTAL, BOUNDS_HORIZONTAL), Mathf.Clamp(newY, -BOUNDS_VERTICAL, BOUNDS_VERTICAL), 0);
+        float newY = this.transform.position.y + simulation.GetLevelConfig().playerSpeed * verticalAxis * Time.deltaTime;
+        float boundsHorizontal = simulation.GetGeneralConfig().playerBoundsHorizontal;
+        float boundsVertical = simulation.GetGeneralConfig().playerBoundsVertical;
+        this.transform.position = new Vector3(Mathf.Clamp(newX, -boundsHorizontal, boundsHorizontal), Mathf.Clamp(newY, -boundsVertical, boundsVertical), 0);
 
         UpdateVisuals(horizontalAxis, verticalAxis);
     }

@@ -6,9 +6,6 @@ using UnityEngine;
 
 public class AttackController : MonoBehaviour
 {
-    public float INITIAL_ATTACK_CD = 2f;
-    public int MAX_HP = 100;
-
     public IndicatorScript indicatorV;
     public IndicatorScript indicatorH;
     public IndicatorScript indicatorDV;
@@ -38,9 +35,9 @@ public class AttackController : MonoBehaviour
     {
         uiManager = GameObject.FindObjectOfType<UIManager>();
         simulation = GameObject.FindObjectOfType<Simulation>();
-        lastIndicatorTime = Time.time + INITIAL_ATTACK_CD;
-        lastShotTime = Time.time + INITIAL_ATTACK_CD;
-        this.SetHitpoints(MAX_HP);
+        lastIndicatorTime = Time.time + simulation.ReloadGeneralConfig().initialAttackCD;
+        lastShotTime = Time.time + simulation.GetGeneralConfig().initialAttackCD;
+        this.SetHitpoints(simulation.GetGeneralConfig().playerMaxHP);
     }
 
     // Update is called once per frame
@@ -96,14 +93,14 @@ public class AttackController : MonoBehaviour
     public void SetHitpoints(int value)
     {
         hitPoints = value;
-        uiManager.SetHPBar(hitPoints, MAX_HP);
+        uiManager.SetHPBar(hitPoints, simulation.GetGeneralConfig().playerMaxHP);
     }
 
     public void ChangeHitpoints(int value)
     {
         hitPoints += value;
-        hitPoints = Math.Clamp(hitPoints, 0, MAX_HP);
-        uiManager.SetHPBar(hitPoints, MAX_HP);
+        hitPoints = Math.Clamp(hitPoints, 0, simulation.GetGeneralConfig().playerMaxHP);
+        uiManager.SetHPBar(hitPoints, simulation.GetGeneralConfig().playerMaxHP);
 
         if(hitPoints == 0)
         {
