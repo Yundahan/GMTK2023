@@ -8,7 +8,7 @@ public class HealAreaScript : MonoBehaviour
     public float DURATION = 0.5f;
     public int HEAL_VALUE = 20;
 
-    public SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
 
     private Simulation simulation;
     private float timer;
@@ -37,6 +37,7 @@ public class HealAreaScript : MonoBehaviour
     void Awake()
     {
         simulation = GameObject.FindObjectOfType<Simulation>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame

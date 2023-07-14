@@ -11,6 +11,7 @@ public class MovementController : MonoBehaviour
 
     private Simulation simulation;
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class MovementController : MonoBehaviour
     {
         simulation = GameObject.FindObjectOfType<Simulation>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -51,11 +53,11 @@ public class MovementController : MonoBehaviour
 
         if(horizontalAxis == 0 && verticalAxis == 0)
         {
-            GetComponent<Animator>().enabled = false;
+            animator.enabled = false;
         }
         else
         {
-            GetComponent<Animator>().enabled = true;
+            animator.enabled = true;
         }
     }
 }

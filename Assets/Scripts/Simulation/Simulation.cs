@@ -82,8 +82,8 @@ public class Simulation : MonoBehaviour
             enemyTimer = Time.time;
 
             GameObject enemy = Instantiate(enemyPrefab, GetEnemySpawnPosition(), Quaternion.identity);
-            enemy.GetComponent<EnemyMovement>().SetHealValue(HEAL_VALUE);
-            enemy.GetComponent<EnemyMovement>().SetDamageValue(DAMAGE_VALUE);
+            enemy.GetComponent<EnemyCombat>().SetHealValue(HEAL_VALUE);
+            enemy.GetComponent<EnemyCombat>().SetDamageValue(DAMAGE_VALUE);
         }
 
         if (HEAL_AREAS_ACTIVE && Time.time - healAreaTimer > HEAL_AREA_CD)
