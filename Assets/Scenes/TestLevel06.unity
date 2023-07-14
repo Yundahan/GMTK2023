@@ -597,6 +597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpBar: {fileID: 409199976}
   pauseImage: {fileID: 244961127}
+  killCount: {fileID: 1280262212}
 --- !u!114 &486281083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -886,9 +887,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 5910619964777669929, guid: 2fc30196ccc742946a9d7c052e5a1f76, type: 3}
   areaPrefab: {fileID: 2835443374175443413, guid: 390ae9b4e26984346a19e1d3de8a6124, type: 3}
   audioSource: {fileID: 1376090510}
-  killcount: {fileID: 1280262212}
   nextLevel: TestLevel07
-  slider: {fileID: 2057732717}
 --- !u!1 &538216352
 GameObject:
   m_ObjectHideFlags: 0

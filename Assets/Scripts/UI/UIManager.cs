@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ public class UIManager : MonoBehaviour
 {
     public Image hpBar;
     public Image pauseImage;
+    public TextMeshProUGUI killCount;
 
     // Start is called before the first frame update
     void Start()
@@ -35,5 +37,10 @@ public class UIManager : MonoBehaviour
     public void HidePauseImage()
     {
         pauseImage.gameObject.SetActive(false);
+    }
+
+    public void SetKillCount(int kills)
+    {
+        killCount.text = kills.ToString();
     }
 }

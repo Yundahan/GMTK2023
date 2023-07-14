@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -24,8 +23,6 @@ public class Simulation : MonoBehaviour
     public GameObject areaPrefab;
 
     public AudioSource audioSource;
-
-    public TextMeshProUGUI killcount;
 
     private UIManager uiManager;
     private AttackController attackController;
@@ -109,7 +106,7 @@ public class Simulation : MonoBehaviour
         if(!saved)
         {
             kills++;
-            killcount.text = kills.ToString();
+            uiManager.SetKillCount(kills);
         }
     }
 
