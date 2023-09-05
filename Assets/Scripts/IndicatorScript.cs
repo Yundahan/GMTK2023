@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IndicatorScript : MonoBehaviour
 {
-    public LaserScript laser;
+    public AttackScript attackScript;
 
     private AttackController attackController;
 
@@ -40,8 +40,8 @@ public class IndicatorScript : MonoBehaviour
 
         if (Time.time - timer > attackController.GetIndicatorDuration())
         {
-            laser.gameObject.SetActive(true);
-            laser.SetTimer();
+            attackScript.gameObject.SetActive(true);
+            attackScript.SetTimer();
             gameObject.SetActive(false);
         }
     }

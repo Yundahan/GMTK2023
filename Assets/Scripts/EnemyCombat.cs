@@ -45,9 +45,9 @@ public class EnemyCombat : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        LaserScript laser = collider.gameObject.GetComponent<LaserScript>();
+        AttackScript attackScript = collider.gameObject.GetComponent<AttackScript>();
 
-        if (laser != null && CheckDamageable())
+        if (attackScript != null && CheckDamageable())
         {
             this.Kill(false);
         }
